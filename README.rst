@@ -1,4 +1,4 @@
-Some binaries used for our GitHub Actions jobs.
+Some binaries used for our GitHub Actions jobs on Ubuntu.
 
 Build and package Doxygen
 =========================
