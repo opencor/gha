@@ -20,8 +20,8 @@ Build and package LLVM+Clang
 
 ::
 
-    export LLVMCLANG_MAJOR_VERSION=14
-    export LLVMCLANG_VERSION=${LLVMCLANG_MAJOR_VERSION}.0.5
+    export LLVMCLANG_MAJOR_VERSION=16
+    export LLVMCLANG_VERSION=${LLVMCLANG_MAJOR_VERSION}.0.6
     wget https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-${LLVMCLANG_VERSION}.tar.gz -O - | tar -xz
     cd llvm-project-llvmorg-${LLVMCLANG_VERSION}
     mkdir build
@@ -34,5 +34,5 @@ Build and package LLVM+Clang
     tar -cz clang -f ~/Desktop/clang.${LLVMCLANG_VERSION}.linux.tar.gz
     tar -cz clang-format -f ~/Desktop/clang-format.${LLVMCLANG_VERSION}.linux.tar.gz
     tar -cz clang-tidy -f ~/Desktop/clang-tidy.${LLVMCLANG_VERSION}.linux.tar.gz
-    cd ../lib/clang/${LLVMCLANG_VERSION}
+    cd ../lib/clang/${LLVMCLANG_MAJOR_VERSION}
     tar -cz . -f ~/Desktop/clang-include.${LLVMCLANG_VERSION}.linux.tar.gz
