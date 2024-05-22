@@ -20,8 +20,8 @@ Build and package LLVM+Clang
 
 ::
 
-    export LLVMCLANG_MAJOR_VERSION=17
-    export LLVMCLANG_VERSION=${LLVMCLANG_MAJOR_VERSION}.0.6
+    export LLVMCLANG_MAJOR_VERSION=18
+    export LLVMCLANG_VERSION=${LLVMCLANG_MAJOR_VERSION}.1.6
     wget https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-${LLVMCLANG_VERSION}.tar.gz -O - | tar -xz
     cd llvm-project-llvmorg-${LLVMCLANG_VERSION}
     mkdir build
