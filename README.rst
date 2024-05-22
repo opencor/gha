@@ -6,7 +6,7 @@ Build and package Doxygen
 ::
 
     export DOXYGEN_VERSION=1.9.3
-    wget https://www.doxygen.nl/files/doxygen-${DOXYGEN_VERSION}.src.tar.gz -O - | tar -xz
+    wget https://doxygen.nl/files/doxygen-${DOXYGEN_VERSION}.src.tar.gz -O - | tar -xz
     cd doxygen-${DOXYGEN_VERSION}
     mkdir build
     cd build
