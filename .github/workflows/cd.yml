@@ -34,47 +34,47 @@ jobs:
           ninja
           cd bin
           tar -cz doxygen -f ${{github.workspace}}/doxygen.${DOXYGEN_VERSION}.linux.tar.gz
-      - name: Upload Doxygen artifact
-        uses: actions/upload-artifact@v4
+      - name: Release Doxygen
+        if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+        uses: softprops/action-gh-release@v1
         with:
-          name: Doxygen
           path: ${{github.workspace}}/*.tar.gz
-  llvm-clang:
-    name: LLVM+Clang
-    runs-on: ubuntu-latest
-    env:
-      BUILDCACHE_ACCURACY: STRICT
-      BUILDCACHE_COMPRESS_FORMAT: ZSTD
-      BUILDCACHE_DEBUG: -1
-      BUILDCACHE_LOG_FILE: ""
-      LLVMCLANG_MAJOR_VERSION: 18
-      LLVMCLANG_VERSION: 18.1.8
-    steps:
-      - name: Install CMake and Ninja
-        uses: lukka/get-cmake@latest
-      - name: Install buildcache
-        uses: mikehardy/buildcache-action@v2
-        with:
-          cache_key: doxygen
-      - name: Build LLVM+Clang
-        run: |
-          wget https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-${LLVMCLANG_VERSION}.tar.gz
-          tar -xf llvmorg-${LLVMCLANG_VERSION}.tar.gz
-          cd llvm-project-llvmorg-${LLVMCLANG_VERSION}
-          mkdir build
-          cd build
-          cmake -G Ninja -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" -DLLVM_TARGETS_TO_BUILD=X86 ../llvm
-          ninja
-          cd bin
-          \rm clang
-          cp -p clang-${LLVMCLANG_MAJOR_VERSION} clang
-          tar -cz clang -f ${{github.workspace}}/clang.${LLVMCLANG_VERSION}.linux.tar.gz
-          tar -cz clang-format -f ${{github.workspace}}/clang-format.${LLVMCLANG_VERSION}.linux.tar.gz
-          tar -cz clang-tidy -f ${{github.workspace}}/clang-tidy.${LLVMCLANG_VERSION}.linux.tar.gz
-          cd ../lib/clang/${LLVMCLANG_MAJOR_VERSION}
-          tar -cz . -f ${{github.workspace}}/clang-include.${LLVMCLANG_VERSION}.linux.tar.gz
-      - name: Upload LLVM+Clang artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: LLVM+Clang
-          path: ${{github.workspace}}/*.tar.gz
+  # llvm-clang:
+  #   name: LLVM+Clang tools
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     BUILDCACHE_ACCURACY: STRICT
+  #     BUILDCACHE_COMPRESS_FORMAT: ZSTD
+  #     BUILDCACHE_DEBUG: -1
+  #     BUILDCACHE_LOG_FILE: ""
+  #     LLVMCLANG_MAJOR_VERSION: 18
+  #     LLVMCLANG_VERSION: 18.1.8
+  #   steps:
+  #     - name: Install CMake and Ninja
+  #       uses: lukka/get-cmake@latest
+  #     - name: Install buildcache
+  #       uses: mikehardy/buildcache-action@v2
+  #       with:
+  #         cache_key: doxygen
+  #     - name: Build LLVM+Clang
+  #       run: |
+  #         wget https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-${LLVMCLANG_VERSION}.tar.gz
+  #         tar -xf llvmorg-${LLVMCLANG_VERSION}.tar.gz
+  #         cd llvm-project-llvmorg-${LLVMCLANG_VERSION}
+  #         mkdir build
+  #         cd build
+  #         cmake -G Ninja -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" -DLLVM_TARGETS_TO_BUILD=X86 ../llvm
+  #         ninja
+  #         cd bin
+  #         \rm clang
+  #         cp -p clang-${LLVMCLANG_MAJOR_VERSION} clang
+  #         tar -cz clang -f ${{github.workspace}}/clang.${LLVMCLANG_VERSION}.linux.tar.gz
+  #         tar -cz clang-format -f ${{github.workspace}}/clang-format.${LLVMCLANG_VERSION}.linux.tar.gz
+  #         tar -cz clang-tidy -f ${{github.workspace}}/clang-tidy.${LLVMCLANG_VERSION}.linux.tar.gz
+  #         cd ../lib/clang/${LLVMCLANG_MAJOR_VERSION}
+  #         tar -cz . -f ${{github.workspace}}/clang-include.${LLVMCLANG_VERSION}.linux.tar.gz
+  #     - name: Release LLVM+Clang tools
+  #       if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+  #       uses: softprops/action-gh-release@v1
+  #       with:
+  #         path: ${{github.workspace}}/*.tar.gz
