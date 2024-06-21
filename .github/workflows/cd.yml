@@ -37,7 +37,7 @@ jobs:
       - name: Release Doxygen
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ci
+          tag_name: gha
           path: ${{github.workspace}}/*.tar.gz
   # llvm-clang:
   #   name: LLVM+Clang tools
@@ -76,5 +76,5 @@ jobs:
   #     - name: Release LLVM+Clang tools
   #       uses: softprops/action-gh-release@v1
   #       with:
-  #         tag_name: ci
+  #         tag_name: gha
   #         path: ${{github.workspace}}/*.tar.gz
