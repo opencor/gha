@@ -1,38 +1,7 @@
-Some binaries used for our GitHub Actions jobs on Ubuntu.
+This repository is used to build the various tools used by our GitHub Actions jobs on Ubuntu, which are:
 
-Build and package Doxygen
-=========================
+- `Doxygen <https://doxygen.nl/>`__; and some
+- `LLVM <https://llvm.org/>`__\ +\ `Clang <https://clang.llvm.org/>`__ tools.
 
-::
-
-    export DOXYGEN_VERSION=1.9.3
-    wget https://doxygen.nl/files/doxygen-${DOXYGEN_VERSION}.src.tar.gz -O - | tar -xz
-    cd doxygen-${DOXYGEN_VERSION}
-    mkdir build
-    cd build
-    cmake -G Ninja -DCMAKE_BUILD_TYPE=Release ..
-    ninja
-    cd bin
-    tar -cz doxygen -f ~/Desktop/doxygen.${DOXYGEN_VERSION}.linux.tar.gz
-
-Build and package LLVM+Clang
-============================
-
-::
-
-    export LLVMCLANG_MAJOR_VERSION=18
-    export LLVMCLANG_VERSION=${LLVMCLANG_MAJOR_VERSION}.1.8
-    wget https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-${LLVMCLANG_VERSION}.tar.gz -O - | tar -xz
-    cd llvm-project-llvmorg-${LLVMCLANG_VERSION}
-    mkdir build
-    cd build
-    cmake -G Ninja -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" -DLLVM_TARGETS_TO_BUILD=X86 ../llvm
-    ninja
-    cd bin
-    \rm clang
-    cp -p clang-${LLVMCLANG_MAJOR_VERSION} clang
-    tar -cz clang -f ~/Desktop/clang.${LLVMCLANG_VERSION}.linux.tar.gz
-    tar -cz clang-format -f ~/Desktop/clang-format.${LLVMCLANG_VERSION}.linux.tar.gz
-    tar -cz clang-tidy -f ~/Desktop/clang-tidy.${LLVMCLANG_VERSION}.linux.tar.gz
-    cd ../lib/clang/${LLVMCLANG_MAJOR_VERSION}
-    tar -cz . -f ~/Desktop/clang-include.${LLVMCLANG_VERSION}.linux.tar.gz
+These tools are automatically built and uploaded as artifacts upon pushing to this repository.
+See `here <https://github.com/opencor/gha/blob/master/.github/workflows/cd.yml>`__ for the version of these tools.
