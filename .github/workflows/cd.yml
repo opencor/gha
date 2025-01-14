@@ -32,13 +32,13 @@ jobs:
           cmake -G Ninja -DCMAKE_BUILD_TYPE=Release ..
           ninja
           cd bin
-          tar -cz doxygen -f ${{github.workspace}}/doxygen.${DOXYGEN_VERSION}.linux.tar.gz
+          tar -cz doxygen -f ${{github.workspace}}/doxygen.tar.gz
           ls -lh ${{github.workspace}}
       - name: Upload Doxygen artifact
         uses: actions/upload-artifact@v4
         with:
           name: Doxygen
-          path: ${{github.workspace}}/*.linux.tar.gz
+          path: ${{github.workspace}}/doxygen.tar.gz
   llvm-clang:
     name: LLVM+Clang tools
     runs-on: ubuntu-latest
@@ -67,14 +67,14 @@ jobs:
           cd bin
           \rm clang
           cp -p clang-${LLVMCLANG_MAJOR_VERSION} clang
-          tar -cz clang -f ${{github.workspace}}/clang.${LLVMCLANG_VERSION}.linux.tar.gz
-          tar -cz clang-format -f ${{github.workspace}}/clang-format.${LLVMCLANG_VERSION}.linux.tar.gz
-          tar -cz clang-tidy -f ${{github.workspace}}/clang-tidy.${LLVMCLANG_VERSION}.linux.tar.gz
+          tar -cz clang -f ${{github.workspace}}/clang.tar.gz
+          tar -cz clang-format -f ${{github.workspace}}/clang-format.tar.gz
+          tar -cz clang-tidy -f ${{github.workspace}}/clang-tidy.tar.gz
           cd ../lib/clang/${LLVMCLANG_MAJOR_VERSION}
-          tar -cz . -f ${{github.workspace}}/clang-include.${LLVMCLANG_VERSION}.linux.tar.gz
+          tar -cz . -f ${{github.workspace}}/clang-include.tar.gz
           ls -lh ${{github.workspace}}
       - name: Upload LLVM+Clang tools artifact
         uses: actions/upload-artifact@v4
         with:
           name: LLVM+Clang tools
-          path: ${{github.workspace}}/*.linux.tar.gz
+          path: ${{github.workspace}}/clang*.tar.gz
