@@ -25,8 +25,7 @@ jobs:
       - name: Build Doxygen
         run: |
           export DOXYGEN_RELEASE=Release_${DOXYGEN_VERSION//./_}
-          wget https://github.com/doxygen/doxygen/archive/refs/tags/${DOXYGEN_RELEASE}.tar.gz
-          tar -xf ${DOXYGEN_RELEASE}.tar.gz
+          wget https://github.com/doxygen/doxygen/archive/refs/tags/${DOXYGEN_RELEASE}.tar.gz -O - | tar -xz
           cd doxygen-${DOXYGEN_RELEASE}
           mkdir build
           cd build
@@ -59,8 +58,7 @@ jobs:
           cache_key: doxygen
       - name: Build LLVM+Clang
         run: |
-          wget https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-${LLVMCLANG_VERSION}.tar.gz
-          tar -xf llvmorg-${LLVMCLANG_VERSION}.tar.gz
+          wget https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-${LLVMCLANG_VERSION}.tar.gz -O - | tar -xz
           cd llvm-project-llvmorg-${LLVMCLANG_VERSION}
           mkdir build
           cd build
