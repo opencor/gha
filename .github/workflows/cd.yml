@@ -8,7 +8,7 @@ on:
 jobs:
   doxygen:
     name: Doxygen
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     env:
       BUILDCACHE_ACCURACY: STRICT
       BUILDCACHE_COMPRESS_FORMAT: ZSTD
@@ -41,7 +41,7 @@ jobs:
           path: ${{github.workspace}}/doxygen.tar.gz
   llvm-clang:
     name: LLVM+Clang tools
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     env:
       BUILDCACHE_ACCURACY: STRICT
       BUILDCACHE_COMPRESS_FORMAT: ZSTD
