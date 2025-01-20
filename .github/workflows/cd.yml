@@ -19,7 +19,7 @@ jobs:
       - name: Install CMake and Ninja
         uses: lukka/get-cmake@latest
       - name: Install buildcache
-        uses: mikehardy/buildcache-action@v2
+        uses: opencor/buildcache-action@v1
         with:
           cache_key: doxygen
       - name: Build Doxygen
@@ -53,7 +53,7 @@ jobs:
       - name: Install CMake and Ninja
         uses: lukka/get-cmake@latest
       - name: Install buildcache
-        uses: mikehardy/buildcache-action@v2
+        uses: opencor/buildcache-action@v1
         with:
           cache_key: llvmclang
       - name: Build LLVM+Clang
