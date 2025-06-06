@@ -27,11 +27,9 @@ jobs:
           export DOXYGEN_RELEASE=Release_${{ env.DOXYGEN_VERSION }}
           wget https://github.com/doxygen/doxygen/archive/refs/tags/${DOXYGEN_RELEASE}.tar.gz -O - | tar -xz
           cd doxygen-${DOXYGEN_RELEASE}
-          mkdir build
-          cd build
-          cmake -G Ninja -DCMAKE_BUILD_TYPE=Release ..
-          ninja
-          cd bin
+          cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build
+          cd build/bin
           tar -cz doxygen -f ${{ github.workspace }}/doxygen.tar.gz
           ls -lh ${{ github.workspace }}
       - name: Upload Doxygen artifact
@@ -60,11 +58,9 @@ jobs:
         run: |
           wget https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-${{ env.LLVMCLANG_VERSION }}.tar.gz -O - | tar -xz
           cd llvm-project-llvmorg-${{ env.LLVMCLANG_VERSION }}
-          mkdir build
-          cd build
-          cmake -G Ninja -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" -DLLVM_TARGETS_TO_BUILD=X86 ../llvm
-          ninja
-          cd bin
+          cmake -G Ninja -S llvm -B build -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" -DLLVM_TARGETS_TO_BUILD=X86
+          cmake --build build
+          cd build/bin
           \rm clang
           cp -p clang-${{ env.LLVMCLANG_MAJOR_VERSION }} clang
           tar -cz clang -f ${{ github.workspace }}/clang.tar.gz
