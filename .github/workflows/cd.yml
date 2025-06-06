@@ -14,7 +14,7 @@ jobs:
       BUILDCACHE_COMPRESS_FORMAT: ZSTD
       BUILDCACHE_DEBUG: -1
       BUILDCACHE_LOG_FILE: ""
-      DOXYGEN_VERSION: 1_9_3
+      DOXYGEN_VERSION: 1_9_3_1
     steps:
       - name: Install CMake and Ninja
         uses: lukka/get-cmake@latest
