@@ -27,7 +27,7 @@ jobs:
           export DOXYGEN_RELEASE=Release_${{ env.DOXYGEN_VERSION }}
           wget https://github.com/doxygen/doxygen/archive/refs/tags/${DOXYGEN_RELEASE}.tar.gz -O - | tar -xz
           cd doxygen-${DOXYGEN_RELEASE}
-          cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5
           cmake --build build
           cd build/bin
           tar -cz doxygen -f ${{ github.workspace }}/doxygen.tar.gz
