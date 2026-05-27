@@ -45,8 +45,8 @@ jobs:
       BUILDCACHE_COMPRESS_FORMAT: ZSTD
       BUILDCACHE_DEBUG: -1
       BUILDCACHE_LOG_FILE: ""
-      LLVMCLANG_MAJOR_VERSION: 20
-      LLVMCLANG_VERSION: 20.1.8
+      LLVMCLANG_MAJOR_VERSION: 22
+      LLVMCLANG_VERSION: 22.1.6
     steps:
       - name: Install CMake and Ninja
         uses: lukka/get-cmake@latest
