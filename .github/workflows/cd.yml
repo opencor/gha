@@ -8,7 +8,7 @@ on:
 jobs:
   doxygen:
     name: Doxygen
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     env:
       BUILDCACHE_ACCURACY: STRICT
       BUILDCACHE_COMPRESS_FORMAT: ZSTD
@@ -39,7 +39,7 @@ jobs:
           tag_name: gha
   llvm-clang:
     name: LLVM+Clang tools
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     env:
       BUILDCACHE_ACCURACY: STRICT
       BUILDCACHE_COMPRESS_FORMAT: ZSTD
