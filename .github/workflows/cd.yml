@@ -54,7 +54,7 @@ jobs:
         uses: opencor/buildcache-action@v1
         with:
           cache_key: llvmclang
-      - name: Build LLVM+Clang
+      - name: Build LLVM+Clang tools
         run: |
           wget https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-${{ env.LLVMCLANG_VERSION }}.tar.gz -O - | tar -xz
           cd llvm-project-llvmorg-${{ env.LLVMCLANG_VERSION }}
@@ -72,5 +72,5 @@ jobs:
       - name: Upload LLVM+Clang tools
         uses: softprops/action-gh-release@v2
         with:
-          files: ${{ github.workspace }}/clang*.tar.gz
+          files: ${{ github.workspace }}/*.tar.gz
           tag_name: gha
